@@ -1,0 +1,6 @@
+file,mse,parameters,
+art_daily_no_noise.csv,25.241356,CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;DL1units=20;DL2units=5;DL3units=1;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=5,
+art_daily_perfect_square_wave.csv,28.934912,CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;DL1units=20;DL2units=5;DL3units=1;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=5,
+art_daily_small_noise.csv,91.266179,CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;DL1units=20;DL2units=5;DL3units=1;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=5,
+art_flatline.csv,0.0,CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;DL1units=20;DL2units=5;DL3units=1;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=5,
+art_noisy.csv,12.515184,CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;DL1units=20;DL2units=5;DL3units=1;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=5,

@@ -58,4 +58,4 @@ def check_nan(np_array):
     return False
 
 def MSE(y, y_hat):
-    return np.square(y - y_hat).mean()
+    return np.around(np.square(y - y_hat).mean(), decimals=6)
