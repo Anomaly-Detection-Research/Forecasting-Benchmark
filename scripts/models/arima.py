@@ -36,7 +36,7 @@ class arima:
                         with warnings.catch_warnings():
                             warnings.simplefilter("ignore")
                             arima_model = sm.tsa.ARIMA(y, order=(ar,d,ma))
-                            arima_result = arima_model.fit(trend='c', disp=-1)
+                            arima_result = arima_model.fit(trend='nc', disp=-1)
                         y_prediction = arima_result.predict()
                         mse = model_helpers.MSE(y,y_prediction)
                     except ValueError:
@@ -46,10 +46,7 @@ class arima:
                     params[ar][d][ma] = mse
                     print("("+str(ar)+","+str(d)+","+str(ma)+") : " +str(mse))
         
-        result = np.where(params == np.amin(params))
-        minAR = result[0][0]
-        minD = result[1][0]
-        minMA = result[2][0]
+        minAR, minD, minMA = model_helpers.get_min_3dmatrix(params)
         print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(params[minAR][minD][minMA]))
         self.ar = minAR
         self.d = minD
@@ -63,7 +60,17 @@ class arima:
         y = self.testing_data
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            arima_model = sm.tsa.ARIMA(y, order=(ar,d,ma))
-            arima_result = arima_model.fit(trend='c', disp=-1)
+            try:
+                arima_model = sm.tsa.ARIMA(y, order=(ar,d,ma))
+                arima_result = arima_model.fit(trend='nc', disp=-1)
+            except ValueError:
+                print("model : ("+str(ar)+","+str(d)+","+str(ma)+") failed ! getting next best model")
+                self.params[ar][d][ma] = float("inf")
+                minAR, minD, minMA = model_helpers.get_min_3dmatrix(self.params)
+                print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(params[minAR][minD][minMA]))
+                self.ar = minAR
+                self.d = minD
+                self.ma = minMA
+                return self.get_output()
         y_prediction = arima_result.predict()
-        return np.array(y_prediction)
+        return ar, d, ma, np.array(y_prediction)

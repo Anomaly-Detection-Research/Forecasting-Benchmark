@@ -17,13 +17,11 @@ csv_input_directory = "../data"
 csv_output_directory = "../results"
 training_ratio = 0.1
 sequance_length = 20
-epochs = 10
+epochs = 15
 batch_size = 1
-models = ["arma","arima","lstm","cnn","lstmcnn"]
-# models = ["arma","arima"]
-# models = ["lstm"]
-# models = ["cnn"]
-# models = ["lstmcnn"]
+# models = ["arma"] #done
+# models = ["arima"] # to be fixed
+models = ["lstm","cnn","lstmcnn"] #running
 
 # get all csv files in input directory
 reg_x = re.compile(r'\.(csv)')
@@ -54,24 +52,25 @@ for m in models:
         # running model
         if(m=="arma"): # ARMA model
             #parms
-            ar_max = 1
-            ma_max = 1
+            ar_max = 4
+            ma_max = 4
 
             arma_model = arma.arma(data=value, training_ratio=training_ratio, ar_max=ar_max, ma_max=ma_max)
-            ar,ma = arma_model.train()
+            arma_model.train()
+            ar, ma, prediction = arma_model.get_output()
             params = "ar="+str(ar)+";ma="+str(ma)+";training_ratio="+str(training_ratio)
-            prediction = arma_model.get_output()
 
         elif(m=="arima"): # ARIMA model
             #params
-            ar_max = 1
-            d_max = 1
-            ma_max = 1
+            ar_max = 4
+            d_max = 2
+            ma_max = 4
 
             arima_model = arima.arima(data=value, training_ratio=training_ratio, ar_max=ar_max, d_max=d_max, ma_max=ma_max)
-            ar,d,ma = arima_model.train()
+            arima_model.train()
+            
+            ar,d,ma,prediction = arima_model.get_output()
             params = "ar="+str(ar)+";d="+str(d)+";ma="+str(ma)+";training_ratio="+str(training_ratio)
-            prediction = arima_model.get_output()
 
         elif(m=="lstm"):
             #params
