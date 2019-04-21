@@ -48,6 +48,7 @@ class arima:
         
         minAR, minD, minMA = model_helpers.get_min_3dmatrix(params)
         print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(params[minAR][minD][minMA]))
+        self.params = params
         self.ar = minAR
         self.d = minD
         self.ma = minMA
@@ -67,7 +68,16 @@ class arima:
                 print("model : ("+str(ar)+","+str(d)+","+str(ma)+") failed ! getting next best model")
                 self.params[ar][d][ma] = float("inf")
                 minAR, minD, minMA = model_helpers.get_min_3dmatrix(self.params)
-                print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(params[minAR][minD][minMA]))
+                print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(self.params[minAR][minD][minMA]))
+                self.ar = minAR
+                self.d = minD
+                self.ma = minMA
+                return self.get_output()
+            except np.linalg.LinAlgError:
+                print("model : ("+str(ar)+","+str(d)+","+str(ma)+") failed ! getting next best model")
+                self.params[ar][d][ma] = float("inf")
+                minAR, minD, minMA = model_helpers.get_min_3dmatrix(self.params)
+                print("Best model : ("+str(minAR)+","+str(minD)+","+str(minMA)+") | with MSE = "+str(self.params[minAR][minD][minMA]))
                 self.ar = minAR
                 self.d = minD
                 self.ma = minMA
