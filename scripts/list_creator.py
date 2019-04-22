@@ -59,7 +59,7 @@ for f in csv_input_files:
     if no_file:
         print 1
     else :
-        if(total_length - len(value) > 0):
+        if(total_length - len(value) >= 0):
             removed_length = total_length - len(value)
             training_ends = training_ends - removed_length
             tesing_start = training_ends
