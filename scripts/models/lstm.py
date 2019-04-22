@@ -4,6 +4,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.layers import Embedding
 from keras.layers import LSTM
+from keras.utils import plot_model
+
 
 class lstm:
     def __init__(self, data,  epochs, batch_size, training_ratio, sequance_length, lstmCells=10):
@@ -45,3 +47,6 @@ class lstm:
         for i in range(0, predictions.shape[0]):
             ret_prediction[i] = predictions[i][0]
         return ret_prediction
+    
+    def print_model(self,f):
+        plot_model(self.model, to_file=f)

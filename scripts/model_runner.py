@@ -20,8 +20,9 @@ sequance_length = 20
 epochs = 15
 batch_size = 1
 # models = ["arma"] #done
-models = ["arima"] # to be fixed
+# models = ["arima"] # to be fixed
 # models = ["lstm","cnn","lstmcnn"] #running
+models = ["lstm"]
 
 # get all csv files in input directory
 reg_x = re.compile(r'\.(csv)')

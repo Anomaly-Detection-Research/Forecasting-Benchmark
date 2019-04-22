@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.layers import Embedding
 from keras.layers import Conv1D, GlobalAveragePooling1D, MaxPooling1D, Flatten
-
+from keras.utils import plot_model
 
 # f = "../../data/artificialNoAnomaly/art_daily_no_noise.csv"
 # dataFrame = pandas.read_csv(f)
@@ -62,3 +62,6 @@ class cnn:
         for i in range(0, predictions.shape[0]):
             ret_prediction[i] = predictions[i][0]
         return ret_prediction
+
+    def print_model(self,f):
+        plot_model(self.model, to_file=f)
