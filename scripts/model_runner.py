@@ -17,12 +17,12 @@ csv_input_directory = "../data"
 csv_output_directory = "../results"
 training_ratio = 0.1
 sequance_length = 20
-epochs = 15
-batch_size = 1
+epochs = 1
+batch_size = 15
 # models = ["arma"] #done
 # models = ["arima"] # to be fixed
 # models = ["lstm","cnn","lstmcnn"] #running
-models = ["lstm"]
+models = ["lstm","lstmcnn"]
 
 # get all csv files in input directory
 reg_x = re.compile(r'\.(csv)')
@@ -76,10 +76,13 @@ for m in models:
         elif(m=="lstm"):
             #params
             lstmCells = 10
+            DL1units = 20
+            DL2units = 5
+            DL3units = 1
 
-            lstm_model = lstm.lstm(data=value,  epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells)
+            lstm_model = lstm.lstm(data=value,  epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, DL1units=DL1units, DL2units=DL2units, DL3units=DL3units)
             lstm_model.train()
-            params = "lstmCells="+str(lstmCells)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
+            params = "lstmCells="+str(lstmCells)+";DL1units="+str(DL1units)+";DL2units="+str(DL2units)+";DL3units="+str(DL3units)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
             prediction = lstm_model.get_output()
 
         elif(m=="cnn"):
@@ -108,13 +111,16 @@ for m in models:
             CL1kernal_size = 2
             CL1strides = 1
             PL1pool_size = 1
-            DL1units = 20
-            DL2units = 5
-            DL3units = 1
+            CNNDL1units = 20
+            CNNDL2units = 5
+            CNNDL3units = 1
+            LSTMDL1units = 20
+            LSTMDL2units = 5
+            LSTMDL3units = 1
 
-            lstmcnn_model = lstmcnn.lstmcnn(data=value, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, DL1units=DL1units, DL2units=DL2units, DL3units=DL3units, lstmWeight=lstmWeight, cnnWeight=cnnWeight)
+            lstmcnn_model = lstmcnn.lstmcnn(data=value, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, LSTMDL1units=LSTMDL1units, LSTMDL2units=LSTMDL2units, LSTMDL3units=LSTMDL3units, CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, CNNDL1units=CNNDL1units, CNNDL2units=CNNDL2units, CNNDL3units=CNNDL3units, lstmWeight=lstmWeight, cnnWeight=cnnWeight)
             lstmcnn_model.train()
-            params = "lstmWeight="+str(lstmWeight)+";cnnWeight="+str(cnnWeight)+";lstmCells="+str(lstmCells)+";CL1filters="+str(CL1filters)+";CL1kernal_size="+str(CL1kernal_size)+";CL1strides="+str(CL1strides)+";PL1pool_size="+str(PL1pool_size)+";DL1units="+str(DL1units)+";DL2units="+str(DL2units)+";DL3units="+str(DL3units)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
+            params = "lstmWeight="+str(lstmWeight)+";cnnWeight="+str(cnnWeight)+";lstmCells="+str(lstmCells)+";LSTMDL1units="+str(LSTMDL1units)+";LSTML2units="+str(LSTMDL2units)+";LSTMDL3units="+str(LSTMDL3units)+";CL1filters="+str(CL1filters)+";CL1kernal_size="+str(CL1kernal_size)+";CL1strides="+str(CL1strides)+";PL1pool_size="+str(PL1pool_size)+";CNNDL1units="+str(CNNDL1units)+";CNNDL2units="+str(CNNDL2units)+";CNNDL3units="+str(CNNDL3units)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
 
             prediction = lstmcnn_model.get_output()
         else:

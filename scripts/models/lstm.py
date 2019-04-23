@@ -8,8 +8,11 @@ from keras.utils import plot_model
 
 
 class lstm:
-    def __init__(self, data,  epochs, batch_size, training_ratio, sequance_length, lstmCells=10):
+    def __init__(self, data,  epochs, batch_size, training_ratio, sequance_length, lstmCells=10, DL1units=20, DL2units=5, DL3units=1):
         self.lstmCells = lstmCells
+        self.DL1units = DL1units
+        self.DL2units = DL2units
+        self.DL3units = DL3units
         self.sequance_length = sequance_length
         self.epochs = epochs
         self.batch_size = batch_size
@@ -34,8 +37,10 @@ class lstm:
     
     def train(self):
         self.model = Sequential()
-        self.model.add(LSTM(units=self.lstmCells))  
-        self.model.add(Dense(units = 1))
+        self.model.add(LSTM(units=self.lstmCells))
+        self.model.add(Dense(units = self.DL1units))
+        self.model.add(Dense(units = self.DL2units))
+        self.model.add(Dense(units = self.DL3units))
 
         self.model.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics=["mse"])  
         self.model.fit(self.training_feature_set, self.labels, epochs = self.epochs, batch_size = self.batch_size)  
