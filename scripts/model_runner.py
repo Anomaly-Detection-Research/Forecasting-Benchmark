@@ -19,10 +19,49 @@ training_ratio = 0.1
 sequance_length = 20
 epochs = 15
 batch_size = 15
+
+# uncoment below line to set models and set getting_models = False
 # models = ["arma"] #done
-# models = ["arima"] #to be fixed
-# models = ["lstm","cnn","lstmcnn"] #running
-models = ["lstm","lstmcnn"]
+getting_models = True
+
+while(getting_models):
+    print("Select model to run")
+    print("1 - arma")
+    print("2 - arima")
+    print("3 - cnn")
+    print("4 - lstm")
+    print("5 - lstmcnn")
+    print("6 - all")
+    print("7 - exit")
+    user_input = input("(Enter number) : ")
+    try:
+        val = int(user_input)
+        if(val == 1):
+            models = ["arma"]
+            getting_models = False
+        elif(val == 2):
+            models = ["arima"]
+            getting_models = False
+        elif(val == 3):
+            models = ["cnn"]
+            getting_models = False
+        elif(val == 4):
+            models = ["lstm"]
+            getting_models = False
+        elif(val == 5):
+            models = ["lstmcnn"]
+            getting_models = False
+        elif(val == 6):
+            models = ["arma","arima","lstm","cnn","lstmcnn"]
+            getting_models = False
+        elif (val == 7):
+            exit()
+        else:
+            print("Invalid argument")
+    except ValueError:
+        print("Invalid argument")
+
+
 
 # get all csv files in input directory
 reg_x = re.compile(r'\.(csv)')
