@@ -1,8 +1,6 @@
 
 $( document ).ready(function() {
-    console.log( "ready!" );
     file = urlParam('file');
-    console.log(file)
     var loading = document.getElementById('loading');
     var link = document.getElementById('link');
 
@@ -10,6 +8,9 @@ $( document ).ready(function() {
     var linkText = document.createTextNode("Get Google Charts");
     a.appendChild(linkText);
     a.href = "charts.html?file="+file;
+    a.classList.add("btn")
+    a.classList.add("btn-primary")
+    a.class = "btn btn-primary"
     link.appendChild(a)
     loading.setAttribute("style","color:red");
     
@@ -31,7 +32,6 @@ $( document ).ready(function() {
     loadFile(file)
 
     function plotData(data,file_name){
-        console.log(data)
         x = []
         y_actual = []
         y_predicted = []

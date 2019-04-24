@@ -1,21 +1,49 @@
 function addItem(ul_id,item){
-	var ul = document.getElementById(ul_id);
-  var li = document.createElement("li");
+  // var ul = document.getElementById(ul_id);
+  
+  // var li = document.createElement("li");
+  // var a = document.createElement('a');
+  // var linkText = document.createTextNode(item.file);
+  // var outText = document.createTextNode(" | mse:"+item.mse+" | params:"+item.parameters);
+  // a.appendChild(linkText);
+  // a.href = "charts-plotly.html?file=data/"+ul_id+"/"+item.file;
+  // li.appendChild(a);
+  // li.appendChild(outText);
+  // ul.appendChild(li);
+
+
+  var tbody = document.getElementById(ul_id);
+  var tr = document.createElement("tr");
+  var td_file = document.createElement("td");
+  var td_mse = document.createElement("td");
+  var td_params = document.createElement("td");
+
   var a = document.createElement('a');
   var linkText = document.createTextNode(item.file);
-  var outText = document.createTextNode(" | mse:"+item.mse+" | params:"+item.parameters);
   a.appendChild(linkText);
   a.href = "charts-plotly.html?file=data/"+ul_id+"/"+item.file;
-  li.appendChild(a);
-  li.appendChild(outText);
-  ul.appendChild(li);
+  td_file.appendChild(a)
+
+  var Text_mse = document.createTextNode(item.mse);
+  td_mse.appendChild(Text_mse)
+
+  var Text_params = document.createTextNode(item.parameters);
+  td_params.appendChild(Text_params)
+
+
+  tr.appendChild(td_file)
+  tr.appendChild(td_mse)
+  tr.appendChild(td_params)
+
+  tbody.appendChild(tr)
 }
 
 function generateList(ul_id,list){
-  for(i=0; i<list.length-1; i++){
+  for(i=0; i<list.length; i++){
     addItem(ul_id,list[i])
   }
-
+  $('#'+ul_id+"-table").DataTable();
+  
 }
 
 
@@ -28,8 +56,14 @@ function loadFile(ul_id,file) {
 
 
 loadFile("arma","./arma_list.csv")
+console.log("arma loaded")
 loadFile("arima","./arima_list.csv")
+console.log("arima loaded")
 loadFile("lstm","./lstm_list.csv")
+console.log("lstm loaded")
 loadFile("cnn","./cnn_list.csv")
+console.log("cnn loaded")
 loadFile("lstmcnn","./lstmcnn_list.csv")
-loadFile("sherlock-lstmcnn","./lstmcnn_list.csv")
+console.log("lstmcnn loaded")
+loadFile("sherlock-lstmcnn","./sherlock-lstmcnn_list.csv")
+console.log("sherlock-lstmcnn loaded")

@@ -5,32 +5,133 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sherlock - Results Analyzer</title>
+    <link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/datatables.min.css">
+    
   </head>
-  <body>
+  <body class="container-fluid">
     <script type="text/javascript" src="./js/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./js/libs/jquery.csv.js"></script>
     <script type="text/javascript" src="./js/libs/papaparse.js"></script>
+    <script type="text/javascript" src="./js/libs/jquery.dataTables.min.js"></script>
     
-    <div>NAB dataset : 58</div>
-    <h1>List of results files</h1>
-    <h2>ARMA</h2>
-    <ul id="arma"></ul>
-    <h2>ARIMA</h2>
-    <ul id="arima"></ul>
-    <h2>LSTM</h2> <a href="lstm_model.png">LSTM Model</a>
-    <ul id="lstm"></ul>
-    <h2>CNN</h2> <a href="cnn_model.png">CNN Model</a>
-    <ul id="cnn"></ul>
-    <h2>LSTMCNN</h2>
-    <ul id="lstmcnn"></ul>
-    <h2>Sherlock LSTMCNN</h2>
-    <ul id="sherlock-lstmcnn"></ul>
+    <br>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        NAB dataset : 58
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <h3>List of results files</h3>
 
-    <!-- <h1>List of NaN files</h1>
-    <div id="nan-count"></div>
-    <ul id="dynamic-list-nan"></ul> -->
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">ARMA</h5>
+          <table id="arma-table" class="display table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="arma">
+              </tbody>
+            </table>
+      </div>
+    </div>
     
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">ARIMA</h5>
+          <table id="arima-table" class="display" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="arima">
+              </tbody>
+            </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">LSTM</h5>
+          <a class="btn btn-primary" href="lstm_model.png" role="button">LSTM Model graph image</a>
+          <table id="lstm-table" class="display table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="lstm">
+              </tbody>
+            </table>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">CNN</h5>
+          <a class="btn btn-primary" href="cnn_model.png" role="button">CNN Model graph image</a>
+          <table id="cnn-table" class="display table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="cnn">
+              </tbody>
+            </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">LSTMCNN</h5>
+          <table id="lstmcnn-table" class="display table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="lstmcnn">
+              </tbody>
+            </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">Sherlock LSTMCNN</h5>
+          <table id="sherlock-lstmcnn-table" class="display table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>file</th>
+                      <th>mse</th>
+                      <th>params</th>
+                  </tr>
+              </thead>
+              <tbody id="sherlock-lstmcnn">
+              </tbody>
+            </table>
+      </div>
+    </div>
+
     <script type="text/javascript" src="./js/list.js"></script>
     
+    <script type="text/javascript" src="./js/libs/popper.min.js "></script>
+    <script type="text/javascript" src="./js/libs/bootstrap.min.js"></script>
   </body>
 </html>

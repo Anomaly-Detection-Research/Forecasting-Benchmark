@@ -6,6 +6,8 @@ var a = document.createElement('a');
 var linkText = document.createTextNode("Get Plot.ly charts");
 a.appendChild(linkText);
 a.href = "charts-plotly.html?file="+file;
+a.classList.add("btn")
+a.classList.add("btn-primary")
 link.appendChild(a)
 
 google.charts.load('current', {'packages':['line', 'corechart']});

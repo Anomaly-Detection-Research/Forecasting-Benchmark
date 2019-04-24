@@ -17,10 +17,10 @@ csv_input_directory = "../data"
 csv_output_directory = "../results"
 training_ratio = 0.1
 sequance_length = 20
-epochs = 1
+epochs = 15
 batch_size = 15
 # models = ["arma"] #done
-# models = ["arima"] # to be fixed
+# models = ["arima"] #to be fixed
 # models = ["lstm","cnn","lstmcnn"] #running
 models = ["lstm","lstmcnn"]
 
