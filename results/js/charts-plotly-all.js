@@ -2,16 +2,6 @@
 $( document ).ready(function() {
     file = urlParam('file');
     var loading = document.getElementById('loading');
-    var link = document.getElementById('link');
-
-    var a = document.createElement('a');
-    var linkText = document.createTextNode("Get Google Charts");
-    a.appendChild(linkText);
-    a.href = "charts.html?file="+file;
-    a.classList.add("btn")
-    a.classList.add("btn-primary")
-    a.class = "btn btn-primary"
-    link.appendChild(a)
     loading.setAttribute("style","color:red");
     
     function urlParam(name){
@@ -22,16 +12,22 @@ $( document ).ready(function() {
         return decodeURI(results[1]) || 0;
     }
 
-    function loadFile(file) {
+    function loadFile(file,model) {
+        file = "data/"+model+"/"+file
         $.get(file, function(csv) {
             var data = $.csv.toObjects(csv);
-            plotData(data, file);
+            plotData(data, file,model);
         });
     }
     
-    loadFile(file)
+    loadFile(file,"arma")
+    loadFile(file,"arima")
+    loadFile(file,"cnn")
+    loadFile(file,"lstm")
+    loadFile(file,"lstmcnn")
+    loadFile(file,"sherlock-lstmcnn")
 
-    function plotData(data,file_name){
+    function plotData(data,file_name,model){
         x = []
         y_actual = []
         y_predicted = []
@@ -61,7 +57,7 @@ $( document ).ready(function() {
             title:file_name
           };
           
-          Plotly.newPlot('chart_div', data, layout, {showSendToCloud: true});
+          Plotly.newPlot(model, data, layout, {showSendToCloud: true});
           loading.setAttribute("style","display:none");
     }
 
