@@ -10,6 +10,7 @@ function addAllItem(item){
   var linkText = document.createTextNode(item.file);
   a.appendChild(linkText);
   a.href = "charts-plotly-all.html?file="+item.file;
+  a.target="_blank"
   td_file.appendChild(a)
 
   // var Text_mse = document.createTextNode(item.mse);
@@ -56,6 +57,7 @@ function addItem(ul_id,item){
   var linkText = document.createTextNode(item.file);
   a.appendChild(linkText);
   a.href = "charts-plotly.html?file=data/"+ul_id+"/"+item.file;
+  a.target="_blank"
   td_file.appendChild(a)
 
   var Text_mse = document.createTextNode(item.mse);
