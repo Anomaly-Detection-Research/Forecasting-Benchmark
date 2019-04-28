@@ -20,12 +20,6 @@ $( document ).ready(function() {
         });
     }
     
-    loadFile(file,"arma")
-    loadFile(file,"arima")
-    loadFile(file,"cnn")
-    loadFile(file,"lstm")
-    loadFile(file,"lstmcnn")
-    loadFile(file,"sherlock-lstmcnn")
 
     function plotData(data,file_name,model){
         x = []
@@ -60,6 +54,14 @@ $( document ).ready(function() {
           Plotly.newPlot(model, data, layout, {showSendToCloud: true});
           loading.setAttribute("style","display:none");
     }
+
+    loadFile(file,"arma")
+    loadFile(file,"arima")
+    loadFile(file,"cnn")
+    loadFile(file,"lstm")
+    loadFile(file,"lstmcnn")
+    loadFile(file,"lstmcnn_kerascombinantion")
+    loadFile(file,"sherlock-lstmcnn")
 
 });
 

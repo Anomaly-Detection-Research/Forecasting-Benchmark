@@ -99,6 +99,8 @@ loadFile("cnn","./cnn_list.csv")
 console.log("cnn loaded")
 loadFile("lstmcnn","./lstmcnn_list.csv")
 console.log("lstmcnn loaded")
+loadFile("lstmcnn_kerascombinantion","./lstmcnn_kerascombinantion_list.csv")
+console.log("lstmcnn_kerascombinantion loaded")
 loadFile("sherlock-lstmcnn","./sherlock-lstmcnn_list.csv")
 console.log("sherlock-lstmcnn loaded")
 
