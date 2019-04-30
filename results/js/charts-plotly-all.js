@@ -59,8 +59,8 @@ $( document ).ready(function() {
     loadFile(file,"arima")
     loadFile(file,"cnn")
     loadFile(file,"lstm")
-    loadFile(file,"lstmcnn")
     loadFile(file,"lstmcnn_kerascombinantion")
+    loadFile(file,"lstmcnn")
     loadFile(file,"sherlock-lstmcnn")
 
 });
