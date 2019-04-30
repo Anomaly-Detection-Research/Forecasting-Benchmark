@@ -14,9 +14,9 @@ import models.lstmcnn as lstmcnn
 import models.lstmcnn_kerascombinantion as lstmcnn_kerascombinantion
 
 # args
-csv_input_directory = "../data"
+csv_input_directory = "../data/electricity_utilization"
 csv_output_directory = "../results"
-training_ratio = 0.1
+training_ratio = 0.58979536887
 sequance_length = 20
 epochs = 15
 batch_size = 1
@@ -83,7 +83,7 @@ for m in models:
     nan_output_files = []
     nan_output_files.append("file")
     helpers.dump_results(output_files, csv_output_directory,m)
-    helpers.dump_files_with_nan(nan_output_files, csv_output_directory,m)
+    # helpers.dump_files_with_nan(nan_output_files, csv_output_directory,m)
 
     print("##### ["+m+"]"+ str(len(csv_input_files)) + " CSV input files to process #####")
     count = 1
