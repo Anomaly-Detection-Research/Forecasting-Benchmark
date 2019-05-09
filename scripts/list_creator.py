@@ -7,15 +7,14 @@ import numpy as np
 import re
 import helpers
 
+# We take input data to created file index so sorted file colomn will be equal to other models
 csv_input_directory = "../data"
 results_folder = "../results/"
 model = "sherlock-lstmcnn"
-training_ends = 301
+tesing_start = 362
 
 list_file = "../results/"
 model_results_folder = results_folder + "data/" + model + "/"
-
-csv_output_directory = results_folder
 
 reg_x = re.compile(r'\.(csv)')
 csv_input_files = []
@@ -26,58 +25,49 @@ csv_input_files.sort()
 
 output_files = []
 output_files.append("file,mse,parameters")
-nan_output_files = []
-nan_output_files.append("file")
-helpers.dump_results(output_files, csv_output_directory,model)
-helpers.dump_files_with_nan(nan_output_files, csv_output_directory,model)
+helpers.dump_results(output_files, results_folder,model)
 for f in csv_input_files:
-
     try :
         # fetching input file data
         dataframe_expect = pandas.read_csv(f)
         value = np.array(dataframe_expect['value'])
-        total_length = len(value)
-        # timestamp = np.array(dataframe_expect['timestamp'])
+        timestamp = np.array(dataframe_expect['timestamp'])
+        try :
+            label = np.array(dataframe_expect['label'])
+        except KeyError:
+            print "Warnning :["+f+"] No `label` colomn found data set without labels !. Assumes there are no anomolies"
+            label = np.zeros(len(value))
 
         dataframe_predction = pandas.read_csv(helpers.get_result_file_name(f,results_folder,model))
-        value = np.array(dataframe_predction['value'])
-        timestamp = np.array(dataframe_predction['timestamp'])
         prediction = np.array(dataframe_predction['prediction'])
-        params = "training_size=300"
+        params = "training_size="+str(tesing_start)
 
-        # checking if prediction contains nan
-        # if helpers.check_nan(prediction):
-        #     nan_output_files.append(f)
-        #     helpers.dump_files_with_nan(nan_output_files, csv_output_directory,model)
-        no_file = False
+        file_not_found = False
     except IOError:
-        no_file = True
-        print "Caught file "
-        nan_output_files.append(f)
-        helpers.dump_files_with_nan(nan_output_files, csv_output_directory,model)
-        pass
-    if no_file:
-        print 1
+        file_not_found = True
+        print("Warnning :["+helpers.get_result_file_name(f,results_folder,model)+"] File not found !")
+    if file_not_found:
+        out_file = helpers.get_result_file_name(f, results_folder,model)
+        output_files.append( helpers.get_result_dump_name(out_file) +",n/a,n/a" )
+        helpers.dump_results(output_files, results_folder,model)
     else :
-        if(total_length - len(value) >= 0):
-            removed_length = total_length - len(value)
-            training_ends = training_ends - removed_length
-            tesing_start = training_ends
-        else :
-            print f
-            print "Error file bigger than it should be"
+        
+        training = np.ones(tesing_start)
+        testing = np.zeros(len(value)-tesing_start)
+        training_colomn = np.append(training, testing)
 
-        tesing_start = training_ends
-        value = value[tesing_start:]
-        timestamp = timestamp[tesing_start:]
-        prediction = prediction[tesing_start:]
-        data = {'prediction':prediction, 'value':value } 
+        testing_prediction = prediction[tesing_start:]
+        prediction = np.append(training, testing_prediction)
+
+        data = {'prediction':prediction, 'value':value, 'prediction_training':training_colomn, 'label':label } 
         dataframe_out = pandas.DataFrame(data, index=timestamp)
         dataframe_out.index.name = "timestamp"
-        dataframe_out = dataframe_out[['value','prediction']]
-        out_file = helpers.get_result_file_name(f, csv_output_directory,model)
+        dataframe_out = dataframe_out[['value','prediction_training','prediction','label']]
+        out_file = helpers.get_result_file_name(f, results_folder,model)
         dataframe_out.to_csv(out_file)
-        mse = helpers.MSE(value,prediction)
-        output_files.append( helpers.get_result_dump_name(out_file) +","+ str(mse)+","+params )
 
-        helpers.dump_results(output_files, csv_output_directory,model)
+        testing_value = value[tesing_start:]
+        mse = helpers.MSE(testing_value,testing_prediction)
+
+        output_files.append( helpers.get_result_dump_name(out_file) +","+ str(mse)+","+params )
+        helpers.dump_results(output_files, results_folder,model)

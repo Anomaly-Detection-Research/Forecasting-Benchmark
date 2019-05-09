@@ -205,17 +205,12 @@ for m in models:
             try :
                 label = np.array(dataframe_expect['label'])
             except KeyError:
-                print "Warnning : No `label` colomn found data set without labels !. Assumes there are no anomolies"
+                print "Warnning :["+f+"] No `label` colomn found data set without labels !. Assumes there are no anomolies"
                 label = np.zeros(len(value))
 
             testing_prediction = prediction
             prediction = np.append(training, prediction)
 
-            # print(len(prediction))
-            # print(len(value))
-            # print(len(training))
-            # print(len(prediction))
-            # print(len(prediction))
             data = {'prediction':prediction, 'value':value, 'prediction_training':training_colomn, 'label':label } 
             dataframe_out = pandas.DataFrame(data, index=timestamp)
             dataframe_out.index.name = "timestamp"
