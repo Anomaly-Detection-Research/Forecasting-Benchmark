@@ -99,8 +99,8 @@ for m in models:
         # running model
         if(m=="arma"): # ARMA model
             #parms
-            ar_max = 1
-            ma_max = 1
+            ar_max = 4
+            ma_max = 4
 
             arma_model = arma.arma(data=value, training_ratio=training_ratio, ar_max=ar_max, ma_max=ma_max)
             arma_model.train()
