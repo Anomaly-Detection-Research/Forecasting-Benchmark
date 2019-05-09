@@ -216,10 +216,10 @@ for m in models:
             # print(len(training))
             # print(len(prediction))
             # print(len(prediction))
-            data = {'prediction':prediction, 'value':value, 'training':training_colomn, 'label':label } 
+            data = {'prediction':prediction, 'value':value, 'prediction_training':training_colomn, 'label':label } 
             dataframe_out = pandas.DataFrame(data, index=timestamp)
             dataframe_out.index.name = "timestamp"
-            dataframe_out = dataframe_out[['value','training','prediction','label']]
+            dataframe_out = dataframe_out[['value','prediction_training','prediction','label']]
             out_file = helpers.get_result_file_name(f, csv_output_directory,m)
             dataframe_out.to_csv(out_file)
 
