@@ -18,7 +18,8 @@ dtw_window_size = 4
 csv_output_directory = "../results"
 training_ratio = 0.1
 threshold_max_multipler = 1.1
-models = ["arma","arima","lstm","cnn","lstmcnn","lstmcnn_kerascombinantion"]
+# models = ["arma","arima","lstm","cnn","lstmcnn","lstmcnn_kerascombinantion"]
+models = ["arma"]
 
 for m in models:
     csv_input_directory = csv_output_directory + "/data/" + m
@@ -50,19 +51,31 @@ for m in models:
         warp_distance = detector_instance.calculate_distances(comparision_window_size=dtw_window_size)
         threshold = detector_instance.set_threshold(training_ratio=training_ratio, max_multipler=threshold_max_multipler)
         positive_detection = detector_instance.get_anomalies()
+
+        threshold_training_ends = int(len(value)*training_ratio)
+        threshold_training = np.ones(threshold_training_ends)
+        threshold_testing = np.zeros(len(value)-threshold_training_ends)
+        threshold_training_colomn = np.append(threshold_training,threshold_testing)
         data = {'value':value,
                 'prediction':prediction,
-                'label':np.array(input_dataframe['label']
+                'prediction_training':np.array(input_dataframe['prediction_training']),
+                'label':np.array(input_dataframe['label']),
                 'warp_distance':warp_distance,
+                'threshold_training':threshold_training_colomn,
                 'distance_threshold':threshold,
                 'positive_detection':positive_detection}
         out_dataframe = pandas.DataFrame(data, index=np.array(input_dataframe['timestamp']))
         out_dataframe.index.name = "timestamp"
-        out_dataframe = dataframe_out[['value','prediction','label','','','']]
-        out_file = helpers.get_result_file_name(f, csv_output_directory,m)
-        out_dataframe.to_csv(out_file)
-        out_dataframe = pandas.DataFrame(data,index=input_dataframe['timestamp'])
-        print(out_dataframe)
+        out_dataframe = dataframe_out[['value',
+                                'prediction_training',
+                                'prediction',
+                                'label',
+                                'warp_distance',
+                                'threshold_training',
+                                'distance_threshold',
+                                'positive_detection']]
+
+        out_dataframe.to_csv(input_file)
 # dtw_val = helpers.get_dtw(value,prediction,3)
 # print(dtw_val[:10])
 # print(dtw_val)
