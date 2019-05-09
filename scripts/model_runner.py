@@ -14,9 +14,9 @@ import models.lstmcnn as lstmcnn
 import models.lstmcnn_kerascombinantion as lstmcnn_kerascombinantion
 
 # args
-csv_input_directory = "../data/electricity_utilization"
+csv_input_directory = "../data"
 csv_output_directory = "../results"
-training_ratio = 0.58979536887
+training_ratio = 0.1
 sequance_length = 20
 epochs = 15
 batch_size = 1
@@ -89,7 +89,8 @@ for m in models:
     count = 1
     for f in csv_input_files:
         print("Processing ["+m+"]" + f)
-
+        if f.split("/")[-1] == "electricity_utilization_specific_user":
+            training_ratio = 0.58979536887
         # fetching input file data
         dataframe_expect = pandas.read_csv(f)
         value = np.array(dataframe_expect['value'])
@@ -98,14 +99,13 @@ for m in models:
         # running model
         if(m=="arma"): # ARMA model
             #parms
-            ar_max = 4
-            ma_max = 4
+            ar_max = 1
+            ma_max = 1
 
             arma_model = arma.arma(data=value, training_ratio=training_ratio, ar_max=ar_max, ma_max=ma_max)
             arma_model.train()
             ar, ma, prediction = arma_model.get_output()
             params = "ar="+str(ar)+";ma="+str(ma)+";training_ratio="+str(training_ratio)
-
         elif(m=="arima"): # ARIMA model
             #params
             ar_max = 4
@@ -117,7 +117,6 @@ for m in models:
             
             ar,d,ma,prediction = arima_model.get_output()
             params = "ar="+str(ar)+";d="+str(d)+";ma="+str(ma)+";training_ratio="+str(training_ratio)
-
         elif(m=="lstm"):
             #params
             lstmCells = 10
@@ -129,7 +128,6 @@ for m in models:
             lstm_model.train()
             params = "lstmCells="+str(lstmCells)+";DL1units="+str(DL1units)+";DL2units="+str(DL2units)+";DL3units="+str(DL3units)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
             prediction = lstm_model.get_output()
-
         elif(m=="cnn"):
             #params
             CL1filters = 1
@@ -168,7 +166,6 @@ for m in models:
             params = "lstmWeight="+str(lstmWeight)+";cnnWeight="+str(cnnWeight)+";lstmCells="+str(lstmCells)+";LSTMDL1units="+str(LSTMDL1units)+";LSTML2units="+str(LSTMDL2units)+";LSTMDL3units="+str(LSTMDL3units)+";CL1filters="+str(CL1filters)+";CL1kernal_size="+str(CL1kernal_size)+";CL1strides="+str(CL1strides)+";PL1pool_size="+str(PL1pool_size)+";CNNDL1units="+str(CNNDL1units)+";CNNDL2units="+str(CNNDL2units)+";CNNDL3units="+str(CNNDL3units)+";epochs="+str(epochs)+";batch_size="+str(batch_size)+";training_ratio="+str(training_ratio)+";sequance_length="+str(sequance_length)
 
             prediction = lstmcnn_model.get_output()
-            
         elif(m=="lstmcnn_kerascombinantion"):
             #params
             lstmWeight = 0.5
@@ -200,16 +197,34 @@ for m in models:
             nan_output_files.append(f)
             helpers.dump_files_with_nan(nan_output_files, csv_output_directory,m)
         else :
-            tesing_start = int(training_ratio*len(value))
-            value = value[tesing_start:]
-            timestamp = timestamp[tesing_start:]
-            data = {'prediction':prediction, 'value':value } 
+            testing_start = int(training_ratio*len(value))
+            training = np.ones(testing_start)
+            testing = np.zeros(len(value)-testing_start)
+            training_colomn = np.append(training,testing)
+            
+            try :
+                label = np.array(dataframe_expect['label'])
+            except KeyError:
+                print "Warnning : No `label` colomn found data set without labels !. Assumes there are no anomolies"
+                label = np.zeros(len(value))
+
+            testing_prediction = prediction
+            prediction = np.append(training, prediction)
+
+            # print(len(prediction))
+            # print(len(value))
+            # print(len(training))
+            # print(len(prediction))
+            # print(len(prediction))
+            data = {'prediction':prediction, 'value':value, 'training':training_colomn, 'label':label } 
             dataframe_out = pandas.DataFrame(data, index=timestamp)
             dataframe_out.index.name = "timestamp"
-            dataframe_out = dataframe_out[['value','prediction']]
+            dataframe_out = dataframe_out[['value','training','prediction','label']]
             out_file = helpers.get_result_file_name(f, csv_output_directory,m)
             dataframe_out.to_csv(out_file)
-            mse = helpers.MSE(value,prediction)
+
+            testing_value = value[testing_start:]
+            mse = helpers.MSE(testing_value, testing_prediction)
             output_files.append( helpers.get_result_dump_name(out_file) +","+ str(mse)+","+params )
 
             helpers.dump_results(output_files, csv_output_directory,m)

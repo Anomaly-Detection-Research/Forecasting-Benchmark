@@ -11,5 +11,6 @@ pip install scipy
 pip install numpy
 pip install tensorflow
 pip install keras
+pip install dtw
 
 echo "Done setup !"
