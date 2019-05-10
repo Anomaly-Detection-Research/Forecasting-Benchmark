@@ -24,19 +24,7 @@ class detector:
         for i in range(0,len(self.distances)):
             if self.distances[i] > self.threshold:
                 self.anomalies[i] = 1
-                print i
         return self.anomalies
-
-
-# f ="./../../results/data/arima/ec2_cpu_utilization_24ae8d.csv"
-# dataframe = pandas.read_csv(f)
-# value = np.array(dataframe['value'])
-# prediction = np.array(dataframe['prediction'])
-
-# mydetector = detector(value, prediction, 3)
-# print mydetector.calculate_distances()
-# print mydetector.set_threshold(training_ratio=0.1,max_multipler=1.1)
-# print mydetector.get_anomalies()
 
 
 

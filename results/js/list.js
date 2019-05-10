@@ -3,8 +3,6 @@ function addAllItem(item){
   var tbody = document.getElementById("all");
   var tr = document.createElement("tr");
   var td_file = document.createElement("td");
-  // var td_mse = document.createElement("td");
-  // var td_params = document.createElement("td");
 
   var a = document.createElement('a');
   var linkText = document.createTextNode(item.file);
@@ -13,16 +11,7 @@ function addAllItem(item){
   a.target="_blank"
   td_file.appendChild(a)
 
-  // var Text_mse = document.createTextNode(item.mse);
-  // td_mse.appendChild(Text_mse)
-
-  // var Text_params = document.createTextNode(item.parameters);
-  // td_params.appendChild(Text_params)
-
-
   tr.appendChild(td_file)
-  // tr.appendChild(td_mse)
-  // tr.appendChild(td_params)
 
   tbody.appendChild(tr)
 }
@@ -51,7 +40,13 @@ function addItem(ul_id,item){
   var tr = document.createElement("tr");
   var td_file = document.createElement("td");
   var td_mse = document.createElement("td");
+  var td_TP = document.createElement("td");
+  var td_FP = document.createElement("td");
+  var td_FN = document.createElement("td");
+  var td_TN = document.createElement("td");
   var td_params = document.createElement("td");
+  var td_threshold_params = document.createElement("td");
+
 
   var a = document.createElement('a');
   var linkText = document.createTextNode(item.file);
@@ -63,13 +58,32 @@ function addItem(ul_id,item){
   var Text_mse = document.createTextNode(item.mse);
   td_mse.appendChild(Text_mse)
 
+  var Text_TP = document.createTextNode(item.TP);
+  td_TP.appendChild(Text_TP)
+
+  var Text_FP = document.createTextNode(item.FP);
+  td_FP.appendChild(Text_FP)
+
+  var Text_FN = document.createTextNode(item.FN);
+  td_FN.appendChild(Text_FN)
+
+  var Text_TN = document.createTextNode(item.TN);
+  td_TN.appendChild(Text_TN)
+
   var Text_params = document.createTextNode(item.parameters);
   td_params.appendChild(Text_params)
 
+  var Text_threshold_params = document.createTextNode(item.threshold_parameters);
+  td_threshold_params.appendChild(Text_threshold_params)
 
   tr.appendChild(td_file)
   tr.appendChild(td_mse)
+  tr.appendChild(td_TP)
+  tr.appendChild(td_FP)
+  tr.appendChild(td_FN)
+  tr.appendChild(td_TN)
   tr.appendChild(td_params)
+  tr.appendChild(td_threshold_params)
 
   tbody.appendChild(tr)
 }
