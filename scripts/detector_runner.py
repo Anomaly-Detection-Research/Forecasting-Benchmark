@@ -19,8 +19,10 @@ dtw_window_size = 4
 csv_output_directory = "../results"
 training_ratio = 0.05
 threshold_max_multipler = 2
-# models = ["arma","arima","lstm","cnn","lstmcnn","lstmcnn_kerascombinantion"]
-models = ["arma"]
+# models = ["arma","arima","lstm","cnn","lstmcnn", "sherlock-lstmcnn","lstmcnn_kerascombinantion"]
+# models = ["arma"]
+# models = ["sherlock-lstmcnn"]
+models = ["lstmcnn_kerascombinantion"]
 
 for m in models:
     csv_input_directory = csv_output_directory + "/data/" + m
@@ -32,10 +34,14 @@ for m in models:
     csv_input_files.sort()
     model_file_name = csv_output_directory + "/" + m + "_list.csv"
     model_dataframe = pandas.read_csv(model_file_name, index_col="file")
-    confudion_metics = np.zeros(len(csv_input_files))
+    mse = np.array(model_dataframe['mse'])
+    confudion_metics = np.zeros(len(mse))
     threshold_parameters = []
-    for i in range(0, len(csv_input_files)):
-            threshold_parameters.append("comparision_window_size="+str(dtw_window_size)+";threshold_max_multipler="+str(threshold_max_multipler)+";training_ratio="+str(training_ratio))
+    for i in range(0, len(mse)):
+            if mse[i] == 'n/a':
+                threshold_parameters.append('n/a')
+            else:
+                threshold_parameters.append("comparision_window_size="+str(dtw_window_size)+";threshold_max_multipler="+str(threshold_max_multipler)+";training_ratio="+str(training_ratio))
     data = {'mse':model_dataframe['mse'], 
             'TP':confudion_metics,
             'FP':confudion_metics,

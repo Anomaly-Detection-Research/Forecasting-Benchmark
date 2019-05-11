@@ -19,7 +19,7 @@ lstmCells = 10
 
 lstm_model = lstm.lstm(data=value,  epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells)
 lstm_model.train()
-lstm_model.print_model("../results/lstm_model.png")
+lstm_model.print_model("../results/resources/img/lstm_model.png")
 
 
 CL1filters = 1
@@ -32,7 +32,7 @@ DL3units = 1
 
 cnn_model = cnn.cnn(data=value, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length,CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, DL1units=DL1units, DL2units=DL2units, DL3units=DL3units)
 cnn_model.train()
-cnn_model.print_model("../results/cnn_model.png")
+cnn_model.print_model("../results/resources/img/cnn_model.png")
 
 
 #params
@@ -54,4 +54,4 @@ LSTMDL3units = 1
 
 lstmcnn_kerascombinantion_model = lstmcnn_kerascombinantion.lstmcnn_kerascombinantion(data=value, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, LSTMDL1units=LSTMDL1units, LSTMDL2units=LSTMDL2units, LSTMDL3units=LSTMDL3units, CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, CNNDL1units=CNNDL1units, CNNDL2units=CNNDL2units, CNNDL3units=CNNDL3units, lstmWeight=lstmWeight, cnnWeight=cnnWeight)
 lstmcnn_kerascombinantion_model.train()
-lstmcnn_kerascombinantion_model.print_model("../results/lstmcnn_kerascombinantion_model.png")
+lstmcnn_kerascombinantion_model.print_model("../results/resources/img/lstmcnn_kerascombinantion_model.png")
