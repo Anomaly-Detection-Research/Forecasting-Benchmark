@@ -4,6 +4,7 @@ apt-get update
 apt-get --yes --force-yes install python-pip
 apt-get --yes --force-yes install python-tk
 apt-get --yes --force-yes install zip
+apt-get --yes --force-yes install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
 pip install -U matplotlib==2.0
 pip install statsmodels
 pip install pandas
