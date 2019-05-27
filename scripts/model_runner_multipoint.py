@@ -32,8 +32,8 @@ parameters = {
     "ma_max":4,
 
     # for LSTM and CNN
-    "epochs":1, 
-    "batch_size":20, 
+    "epochs":15, 
+    "batch_size":1,
     "sequance_length":10,
     "DL1units":20, 
     "DL2units":15, 
