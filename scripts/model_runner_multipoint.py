@@ -61,7 +61,7 @@ parameters = {
 
 # uncoment below line to set models and set getting_models = False
 # models = ["arma"] #done
-models = ["multi_lstm"]
+models = ["multi_cnn","multi_lstm"]
 # getting_models = True
 getting_models = False
 
