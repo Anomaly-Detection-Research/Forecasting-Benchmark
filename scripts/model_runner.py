@@ -6,7 +6,7 @@ import os
 import numpy as np
 import re
 import helpers
-import models.arma as arma
+import models.armaModel as arma
 import models.arima as arima
 import models.lstm as lstm
 import models.cnn as cnn

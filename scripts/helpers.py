@@ -60,3 +60,13 @@ def check_nan(np_array):
 
 def MSE(y, y_hat):
     return np.around(np.square(y - y_hat).mean(), decimals=6)
+
+def MSE_multipoint(y, y_hats, no_of_prediction_points):
+    mse = 0
+    for y_hat_index in range(no_of_prediction_points):
+        y_hat = y_hats[y_hat_index]
+        for i in range(len(y)):
+            if i+y_hat_index < len(y):
+                mse += (y[i+y_hat_index] - y_hat[i])**2
+    mse = mse/(no_of_prediction_points*len(y))
+    return np.around(mse,decimals=6)
