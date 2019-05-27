@@ -1,5 +1,4 @@
 import numpy as np
-from dtw import dtw
 
 def file_csv_to_txt(file_name):
     file_name = list(file_name)
