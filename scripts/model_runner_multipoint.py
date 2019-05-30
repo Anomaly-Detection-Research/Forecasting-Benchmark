@@ -13,7 +13,7 @@ import helpers
 # import models.lstmcnn as lstmcnn
 # import models.lstmcnn_kerascombinantion as lstmcnn_kerascombinantion
 
-from models.mutipoint.modelFactory import modelFactory
+from mutipoint_models.modelFactory import modelFactory
 
 # args
 csv_input_directory = "../data"
@@ -61,7 +61,8 @@ parameters = {
 
 # uncoment below line to set models and set getting_models = False
 # models = ["arma"] #done
-models = ["multi_cnn","multi_lstm"]
+# models = ["multi_cnn","multi_lstm"]
+models = ["multi_lstmcnn"]
 # getting_models = True
 getting_models = False
 

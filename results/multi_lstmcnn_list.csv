@@ -1,0 +1,3 @@
+file,mse,parameters,
+art_daily_no_noise.csv,151.051398,lstmWeight=0.5;cnnWeight=0.5;lstmCells=10;LSTMDL1units=20;LSTML2units=15;LSTMDL3units=5;CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;CNNDL1units=20;CNNDL2units=15;CNNDL3units=5;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=10;no_of_prediction_points=5,
+art_daily_perfect_square_wave.csv,262.494645,lstmWeight=0.5;cnnWeight=0.5;lstmCells=10;LSTMDL1units=20;LSTML2units=15;LSTMDL3units=5;CL1filters=1;CL1kernal_size=2;CL1strides=1;PL1pool_size=1;CNNDL1units=20;CNNDL2units=15;CNNDL3units=5;epochs=1;batch_size=1;training_ratio=0.1;sequance_length=10;no_of_prediction_points=5,

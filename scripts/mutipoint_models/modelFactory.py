@@ -1,5 +1,6 @@
 from cnn import cnn
 from lstm import lstm
+from lstmcnn import lstmcnn
 
 class modelFactory:
     def __init__(self):
