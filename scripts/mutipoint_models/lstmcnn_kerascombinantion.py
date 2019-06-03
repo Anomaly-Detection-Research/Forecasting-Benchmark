@@ -8,7 +8,7 @@ from keras.utils import plot_model
 
 
 class lstmcnn_kerascombinantion:
-    def __init__(self, data,  epochs, batch_size, training_ratio,sequance_length, lstmCells=10, LSTMDL1units=20, LSTMDL2units=5, LSTMDL3units=1, CL1filters=1, CL1kernal_size=2, CL1strides=1, PL1pool_size=1, CNNDL1units=20, CNNDL2units=5, CNNDL3units=1, lstmWeight=0.5, cnnWeight=0.5):
+    def __init__(self, parameters):
         self.lstmCells = parameters["lstmCells"]
         self.LSTMDL1units = parameters["LSTMDL1units"]
         self.LSTMDL2units = parameters["LSTMDL2units"]
@@ -30,7 +30,7 @@ class lstmcnn_kerascombinantion:
         self.no_of_prediction_points = parameters["no_of_prediction_points"]
         self.data = parameters["data"]
         training_data_end = int(len(self.data)*self.training_ratio)
-        testing_data_start = training_data_end - sequance_length
+        testing_data_start = training_data_end - self.sequance_length
         training_data = self.data[:training_data_end]
         testing_data = self.data[testing_data_start:]
 
@@ -67,6 +67,9 @@ class lstmcnn_kerascombinantion:
         cnndense1 = Dense(units = self.CNNDL1units)(cnnflaten)
         cnndense2 = Dense(units = self.CNNDL2units)(cnndense1)
         cnndense3 = Dense(units = self.CNNDL3units)(cnndense2)
+        print("##########")
+        print(self.CNNDL3units)
+        print(self.LSTMDL3units)
 
         #combinantion layer
         out = Add()([lstmdense3, cnndense3])
@@ -92,7 +95,7 @@ class lstmcnn_kerascombinantion:
             for j in range(0, predictions.shape[0]):
                 ret_prediction_colomn[j] = predictions[j][i]
             ret_prediction.append(ret_prediction_colomn)
-            
+
         return ret_prediction
     
     def print_model(self,f):
