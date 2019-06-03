@@ -2,7 +2,7 @@ import SimpleHTTPServer
 import SocketServer
 import os
 
-PORT = 8000
+PORT = 80
 
 web_dir = "../results"
 os.chdir(web_dir)

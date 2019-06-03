@@ -1,6 +1,7 @@
 from cnn import cnn
 from lstm import lstm
 from lstmcnn import lstmcnn
+from lstmcnn_kerascombinantion import lstmcnn_kerascombinantion
 
 class modelFactory:
     def __init__(self):
