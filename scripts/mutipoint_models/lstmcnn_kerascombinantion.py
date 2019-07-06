@@ -71,8 +71,9 @@ class lstmcnn_kerascombinantion:
         print(self.CNNDL3units)
         print(self.LSTMDL3units)
 
-        #combinantion layer
+        #combinantion layer TO BE FIXED
         out = Add()([lstmdense3, cnndense3])
+        # https://keras.io/layers/merge/
 
         self.model = Model(input_shape, out)
 
