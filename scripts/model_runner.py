@@ -15,7 +15,7 @@ import models.lstmcnn as lstmcnn
 import models.lstmcnn_kerascombinantion as lstmcnn_kerascombinantion
 
 # args
-input_directory = "../data/nab_tuned_test"
+input_directory = "../data/nab_tuned"
 input_summary_file = "../data/nab_tuned_summary.csv"
 output_directory = "../results"
 
