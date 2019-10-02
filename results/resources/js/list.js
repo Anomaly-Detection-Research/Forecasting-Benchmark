@@ -105,6 +105,10 @@ function loadFile(ul_id,file) {
 }
 
 
+
+loadFile("sherlock-framework","./sherlock-framework_list.csv",)
+console.log("sherlock-framework loaded")
+
 loadFile("arma","./arma_list.csv",)
 console.log("arma loaded")
 loadFile("arima","./arima_list.csv")

@@ -147,13 +147,16 @@ $( document ).ready(function() {
       }
     }
 
+    // modelArray = ["sherlock-lstmcnn",
+    //               "lstmcnn",
+    //               "lstmcnn_kerascombinantion",
+    //               "lstm",
+    //               "cnn",
+    //               "arima",
+    //               "arma"]
     modelArray = ["sherlock-lstmcnn",
-                  "lstmcnn",
-                  "lstmcnn_kerascombinantion",
-                  "lstm",
-                  "cnn",
-                  "arima",
-                  "arma"]
+                  "sherlock-framework",
+                  "lstmcnn_kerascombinantion"]
     // loading.setAttribute("style","display:none");
     loading.innerText = "Running !"
     loadFilesRecursive(modelArray)

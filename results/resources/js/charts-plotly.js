@@ -1,7 +1,7 @@
 
 $( document ).ready(function() {
     file = urlParam('file');
-    var loading = document.getElementById('loading');
+    // var loading = document.getElementById('loading');
     var loading_all = document.getElementById('loading_all');
     var link = document.getElementById('link');
 
@@ -13,7 +13,7 @@ $( document ).ready(function() {
     a.classList.add("btn-primary")
     a.class = "btn btn-primary"
     link.appendChild(a)
-    loading.setAttribute("style","color:red");
+    // loading.setAttribute("style","color:red");
     loading_all.setAttribute("style","color:red");
     
     function urlParam(name){
@@ -27,7 +27,7 @@ $( document ).ready(function() {
     function loadFile(file) {
         $.get(file, function(csv) {
             var data = $.csv.toObjects(csv);
-            plotData(data, file);
+            // plotData(data, file);
             plotAllData(data, file);
         });
     }
