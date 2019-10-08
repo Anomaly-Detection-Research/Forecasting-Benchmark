@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realKnownCause/nyc_taxi.txt", 
+    "input_file_csv": "../data/nab/realKnownCause/nyc_taxi.csv", 
+    "expect_file": "../data/nab/realKnownCause/nyc_taxi_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.01, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 30, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 20
+                    }, 
+                    {
+                        "outputs": 10
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.5, 
+            "LSTM": {
+                "memCells": 4
+            }, 
+            "cnnW": 0.5
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 600, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 10320, 
+    "dtw_window": 2,
+    "predict_file": "../data/nab/realKnownCause/nyc_taxi_predict.txt"
+}

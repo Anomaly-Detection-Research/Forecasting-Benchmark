@@ -50,6 +50,13 @@ class confusion_metrics:
                 
                 in_anomaly_window = False
                 this_anomaly_detected = False
+            
+            # if in anomaly window at the end of data set
+            if i == (len(self.label)-1) and in_anomaly_window:
+                # if prior anomaly window not detected
+                if not this_anomaly_detected:
+                    self.FalseNegative += 1
+
 
     def get_TP(self):
         return self.TruePostive

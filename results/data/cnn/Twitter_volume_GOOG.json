@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realTweets/Twitter_volume_GOOG.txt", 
+    "input_file_csv": "../data/nab/realTweets/Twitter_volume_GOOG.csv", 
+    "expect_file": "../data/nab/realTweets/Twitter_volume_GOOG_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.00001, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 30, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 10
+                    }, 
+                    {
+                        "outputs": 5
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.6, 
+            "LSTM": {
+                "memCells": 5
+            }, 
+            "cnnW": 0.1
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 600, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 15842,
+    "dtw_window": 10,
+    "predict_file": "../data/nab/realTweets/Twitter_volume_GOOG_predict.txt"
+}
