@@ -5,6 +5,7 @@ from keras.layers import Dense, Dropout, Input, Add, Layer
 from keras.layers import Embedding
 from keras.layers import LSTM, Conv1D, GlobalAveragePooling1D, MaxPooling1D, Flatten
 from keras.utils import plot_model
+from keras import optimizers
 
 # Define custom layer for weighted sum
 class WeightedSum(Layer):
@@ -18,7 +19,7 @@ class WeightedSum(Layer):
         return input_shape[0]
 
 class lstmcnn_kerascombinantion:
-    def __init__(self, data,  epochs, batch_size, training_ratio,sequance_length, lstmCells=10, LSTMDL1units=20, LSTMDL2units=5, LSTMDL3units=1, CL1filters=1, CL1kernal_size=2, CL1strides=1, PL1pool_size=1, CNNDL1units=20, CNNDL2units=5, CNNDL3units=1,lstmWeight=0.5, cnnWeight=0.5):
+    def __init__(self, data,  epochs, batch_size, training_ratio,sequance_length, lstmCells=10, LSTMDL1units=20, LSTMDL2units=5, LSTMDL3units=1, CL1filters=1, CL1kernal_size=2, CL1strides=1, PL1pool_size=1, CNNDL1units=20, CNNDL2units=5, CNNDL3units=1,lstmWeight=0.5, cnnWeight=0.5, learningRate=0.001):
         self.lstmCells = lstmCells
         self.LSTMDL1units = LSTMDL1units
         self.LSTMDL2units = LSTMDL2units
@@ -34,6 +35,8 @@ class lstmcnn_kerascombinantion:
 
         self.lstmWeight = lstmWeight
         self.cnnWeight = cnnWeight
+
+        self.learningRate = learningRate
 
         self.sequance_length = sequance_length
         self.epochs = epochs
@@ -82,7 +85,9 @@ class lstmcnn_kerascombinantion:
 
         self.model = Model(input_shape, out)
 
-        self.model.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics=["mse"])  
+        adam = optimizers.Adam(lr=self.learningRate)
+
+        self.model.compile(optimizer = adam, loss = 'mean_squared_error', metrics=["mse"])
         self.model.fit(self.training_feature_set, self.labels, epochs = self.epochs, batch_size = self.batch_size)  
 
         

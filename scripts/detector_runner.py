@@ -21,8 +21,11 @@ max_training_ratio = 0.15
 max_training_ratio_buffer = 0.95
 threshold_max_multipler = 2
 
-models = ["arma","arima","lstm","cnn","lstmcnn","lstmcnn_kerascombinantion"]
+models = ["arma","arima","lstm","cnn","lstmcnn","lstmcnn_kerascombinantion","lstmcnn_kerascombinantion_vanila"]
+# models = ["lstmcnn_kerascombinantion_vanila"]
 # models = ["lstmcnn_kerascombinantion"]
+# models = ["lstm"]
+
 
 input_summary = pandas.read_csv(input_summary_file, index_col="file")
 

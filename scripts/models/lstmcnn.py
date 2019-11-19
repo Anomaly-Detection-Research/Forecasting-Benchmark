@@ -3,11 +3,11 @@ import lstm
 import cnn
 
 class lstmcnn:
-    def __init__(self, data, epochs, batch_size, training_ratio, sequance_length, lstmCells=10, LSTMDL1units=20, LSTMDL2units=5, LSTMDL3units=1, CL1filters=1, CL1kernal_size=2, CL1strides=1, PL1pool_size=1, CNNDL1units=20, CNNDL2units=5, CNNDL3units=1, lstmWeight=0.5, cnnWeight=0.5):
+    def __init__(self, data, epochs, batch_size, training_ratio, sequance_length, lstmCells=10, LSTMDL1units=20, LSTMDL2units=5, LSTMDL3units=1, CL1filters=1, CL1kernal_size=2, CL1strides=1, PL1pool_size=1, CNNDL1units=20, CNNDL2units=5, CNNDL3units=1, lstmWeight=0.5, cnnWeight=0.5, learningRate=0.001):
         
-        self.lstm_model = lstm.lstm(data=data,  epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, DL1units=LSTMDL1units, DL2units=LSTMDL2units, DL3units=LSTMDL3units)
+        self.lstm_model = lstm.lstm(data=data,  epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length, lstmCells=lstmCells, learningRate=learningRate)
         
-        self.cnn_model = cnn.cnn(data=data, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length,CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, DL1units=CNNDL1units, DL2units=CNNDL2units, DL3units=CNNDL3units)
+        self.cnn_model = cnn.cnn(data=data, epochs=epochs, batch_size=batch_size, training_ratio=training_ratio, sequance_length=sequance_length,CL1filters=CL1filters, CL1kernal_size=CL1kernal_size, CL1strides=CL1strides, PL1pool_size=PL1pool_size, DL1units=CNNDL1units, DL2units=CNNDL2units, DL3units=CNNDL3units, learningRate=learningRate)
 
         self.lstmWeight = lstmWeight
         self.cnnWeight = cnnWeight
