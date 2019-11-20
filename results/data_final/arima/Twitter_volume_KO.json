@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realTweets/Twitter_volume_KO.txt", 
+    "input_file_csv": "../data/nab/realTweets/Twitter_volume_KO.csv", 
+    "expect_file": "../data/nab/realTweets/Twitter_volume_KO_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.00001, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 10, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 20
+                    }, 
+                    {
+                        "outputs": 5
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.2, 
+            "LSTM": {
+                "memCells": 10
+            }, 
+            "cnnW": 0.1
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 600, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 15851, 
+    "dtw_window": 10,
+    "predict_file": "../data/nab/realTweets/Twitter_volume_KO_predict.txt"
+}

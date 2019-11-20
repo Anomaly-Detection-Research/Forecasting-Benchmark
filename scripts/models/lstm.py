@@ -41,9 +41,7 @@ class lstm:
     def train(self):
         self.model = Sequential()
         self.model.add(LSTM(units=self.lstmCells))
-        self.model.add(Dense(units = self.DL1units))
-        self.model.add(Dense(units = self.DL2units))
-        self.model.add(Dense(units = self.DL3units))
+        self.model.add(Dense(units=1))
 
         adam = optimizers.Adam(lr=self.learningRate)
 

@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realAdExchange/exchange-2_cpm_results.txt", 
+    "input_file_csv": "../data/nab/realAdExchange/exchange-2_cpm_results.csv", 
+    "expect_file": "../data/nab/realAdExchange/exchange-2_cpm_results_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.0001, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 10, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 20
+                    }, 
+                    {
+                        "outputs": 5
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.9, 
+            "LSTM": {
+                "memCells": 5
+            }, 
+            "cnnW": 0.2
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 200, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 1624, 
+    "dtw_window": 5,
+    "predict_file": "../data/nab/realAdExchange/exchange-2_cpm_results_predict.txt"
+}

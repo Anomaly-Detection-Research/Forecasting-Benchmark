@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realTraffic/speed_7578.txt", 
+    "input_file_csv": "../data/nab/realTraffic/speed_7578.csv", 
+    "expect_file": "../data/nab/realTraffic/speed_7578_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.0001, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 30, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 20
+                    }, 
+                    {
+                        "outputs": 10
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.9, 
+            "LSTM": {
+                "memCells": 10
+            }, 
+            "cnnW": 0.1
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 200, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 1127, 
+    "dtw_window": 5,
+    "predict_file": "../data/nab/realTraffic/speed_7578_predict.txt"
+}

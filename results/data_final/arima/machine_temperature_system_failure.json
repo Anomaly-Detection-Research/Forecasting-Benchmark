@@ -1,0 +1,57 @@
+{
+    "input_file": "../data/nab/realKnownCause/machine_temperature_system_failure.txt", 
+    "input_file_csv": "../data/nab/realKnownCause/machine_temperature_system_failure.csv", 
+    "expect_file": "../data/nab/realKnownCause/machine_temperature_system_failure_expect.txt", 
+    "prediction_model": {
+        "learningRate": 0.01, 
+        "model": {
+            "CNN": {
+                "PoolingLayers": [
+                    {
+                        "poolH": 1, 
+                        "poolW": 1
+                    }
+                ], 
+                "matWidth": 30, 
+                "FullyConnectedLayers": [
+                    {
+                        "outputs": 20
+                    }, 
+                    {
+                        "outputs": 10
+                    }, 
+                    {
+                        "outputs": 1
+                    }
+                ], 
+                "LayerOrder": [
+                    "C", 
+                    "P", 
+                    "F", 
+                    "F", 
+                    "F"
+                ], 
+                "matHeight": 2, 
+                "targetC": 1, 
+                "ConvolutionLayers": [
+                    {
+                        "stride": 1, 
+                        "filterSize": 2, 
+                        "filters": 1
+                    }
+                ]
+            }, 
+            "lstmW": 0.2, 
+            "LSTM": {
+                "memCells": 10
+            }, 
+            "cnnW": 1.0
+        }, 
+        "trainingIterations": 12, 
+        "trainDataSize": 1200, 
+        "numPredPoints": 1
+    }, 
+    "input_size": 22695, 
+    "dtw_window": 2,
+    "predict_file": "../data/nab/realKnownCause/machine_temperature_system_failure_predict.txt"
+}

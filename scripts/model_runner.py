@@ -24,10 +24,11 @@ max_training_ratio = 0.15
 prediction_training_ratio = 0.75
 max_training_ratio_buffer = 0.95
 
-models = ["arma","arima","lstm","cnn","lstmcnn_kerascombinantion_vanila"]
+# models = ["arma","arima","lstm","cnn","lstmcnn_kerascombinantion_vanila"]
+# models = ["lstm","cnn","lstmcnn_kerascombinantion_vanila"]
 # models = ["lstmcnn_kerascombinantion_vanila"]
 # models = ["lstmcnn_kerascombinantion"]
-# models = ["lstm"]
+models = ["lstmcnn_kerascombinantion_vanila"]
 
 
 
